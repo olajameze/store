@@ -1,15 +1,16 @@
-/* eslint-disable react/jsx-no-undef */
+
 import React from 'react'
 import SearchBar from './SearchBar'
 import ProductTable from './ProductTable'
 
 
 
-export default function FilterableProductTable() {
+export default function FilterableProductTable(props) {
+  const { products } = props;
   return (
     <div>
         <SearchBar />
-        <ProductTable />
+        <ProductTable products={products} />
     </div>
   )
 }

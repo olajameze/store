@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function ProductCategoryRow() {
+export default function ProductCategoryRow(props) {
+  const { category } = props;
   return (
-    <div>
-        
-    </div>
+   <tr>
+    <th colSpan="2">{category}</th>
+   </tr>
   )
 }

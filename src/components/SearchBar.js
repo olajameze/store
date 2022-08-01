@@ -5,8 +5,8 @@ export default function SearchBar() {
     <form>
        <input type="text" placeholder="search..."/>
        <p>
-          <input type="checkbox" />
-          {'.'}
+          <input type="checkbox"/>
+          {''}
           Only show products in stock
        </p>
     </form>
