@@ -1,46 +1,51 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import ProductCategoryRow from './ProductCategoryRow'
 import ProductRow from './ProductRow'
 
 export default function ProductTable(props) {
-  const { products } = props;
+  const { products, inStockOnly, filterText } = props;
 
   const rows = [];
   let lastCategory = null;
 
-products.forEach((product) => {
-  
-  if (product.category !== lastCategory) {
+  products.forEach((product) => {
+    if (product.name.indexOf(filterText) === -1) {
+      return;
+    }
+
+    if (inStockOnly && !product.stocked) {
+      return;
+    }
+
+    if (product.category !== lastCategory) {
+      rows.push(
+        <ProductCategoryRow
+          category={product.category}
+          key={product.category}
+        />
+      )
+    }
     rows.push(
-      <ProductCategoryRow 
-        category={product.category}
-        key={product.category}
+      <ProductRow
+        product={product}
+        key={product.name}
       />
     )
-  }
-
-  rows.push(
-    <ProductRow
-      product={product}
-      key={product.name}
-    />
-  )
-  
-  lastCategory = product.category;
-
-})
+    lastCategory = product.category;
+  })
 
   return (
     <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {rows}
-        </tbody>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows}
+      </tbody>
     </table>
   )
 }
